@@ -14,7 +14,7 @@ class Market(
     val description: String,
     val isActive: Boolean,
 ) {
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     var lastChange: Date? = null
 
     @ManyToOne
@@ -40,16 +40,16 @@ class Schedule(
         name = "market_id",
     )
     val market: Market,
-
+) {
     @OneToMany(
         mappedBy = "schedule",
         cascade = [CascadeType.ALL],
         fetch = FetchType.EAGER,
         orphanRemoval = true,
     )
-    val weekDays: MutableSet<WeekDay>
-) {
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    lateinit var weekDays: MutableSet<WeekDay>
+
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     var lastChange: Date? = null
 
     @ManyToOne
@@ -65,13 +65,13 @@ class WeekDay(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     val day: String,
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     val startTime: Date,
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     val endTime: Date,
     @ManyToOne
     @JoinColumn(
         name = "schedule_id"
     )
-    val schedule: Schedule
+    val schedule: Schedule,
 )

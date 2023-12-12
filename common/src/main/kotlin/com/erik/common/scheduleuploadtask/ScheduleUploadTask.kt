@@ -12,7 +12,7 @@ class ScheduleUploadTask(
     val id: Long,
     @Enumerated(EnumType.STRING)
     val status: TaskStatus,
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     val startedAt: Date,
     @ManyToOne
     @JoinColumn(

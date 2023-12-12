@@ -1,1 +1,19 @@
+spring:
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:54320/schedule
+    username: schedule
+    password: schedule
+    driver-class-name: org.postgresql.Driver
 
+private:
+  key:
+    filename: "services/schedule-service/private_key.der"
+public:
+  key:
+    filename: "services/schedule-service/public_key.der"
+
+logging:
+  level:
+    web: debug
