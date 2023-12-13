@@ -1,1 +1,19 @@
+spring:
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:54320/schedule
+    username: schedule
+    password: schedule
+    driver-class-name: org.postgresql.Driver
 
+logging:
+  level:
+    web: debug
+
+server:
+  port: 8081
+
+public:
+  key:
+    filename: "services/async-task-service/public_key.der"

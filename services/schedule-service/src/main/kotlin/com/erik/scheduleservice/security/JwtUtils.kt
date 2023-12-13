@@ -1,13 +1,9 @@
 package com.erik.scheduleservice.security
 
-import com.erik.common.exception.InternalServerException
 import com.erik.common.user.Role
-import com.erik.scheduleservice.config.AuthorizedUser
-import com.erik.scheduleservice.config.TokenBasedAuthentication
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -57,19 +53,4 @@ class JwtUtils(
         return Jwts.builder().setClaims(claims).setExpiration(expirationTime)
             .signWith(SignatureAlgorithm.RS512, privateKey).compact()
     }
-}
-
-fun getUserFromContext(): AuthorizedUser {
-    val context = SecurityContextHolder.getContext()
-        ?: throw InternalServerException("Can't retrieve user when security context is null")
-    val authentication = context.authentication
-        ?: throw InternalServerException("Can't retrieve user when authentication object in security context is null")
-    if (!authentication.isAuthenticated) {
-        throw InternalServerException("Can't retrieve user when authentication.IsAuthenticated is False")
-    }
-    if (authentication !is TokenBasedAuthentication) {
-        throw InternalServerException("Can't retrieve user when authentication object in security context " +
-                "is not an instance of ${TokenBasedAuthentication::class.java.name}")
-    }
-    return authentication.user
 }

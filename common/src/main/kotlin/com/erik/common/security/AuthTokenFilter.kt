@@ -1,4 +1,4 @@
-package com.erik.scheduleservice.config
+package com.erik.common.security
 
 import com.erik.common.user.Role
 import com.erik.common.utils.log
@@ -107,7 +107,7 @@ class AuthTokenFilter(
             token = "",
             role = Role.USER
         )
-        authentication.isAuthenticated = false
+        authentication.isAuthenticated = true
         securityContext.authentication = authentication
 
         chain.doFilter(request, response)

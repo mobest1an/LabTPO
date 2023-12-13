@@ -11,14 +11,18 @@ class ScheduleUploadTask(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     @Enumerated(EnumType.STRING)
-    val status: TaskStatus,
+    var status: TaskStatus,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     val startedAt: Date,
-    @ManyToOne
-    @JoinColumn(
-        name = "schedule_id"
+    @ManyToMany(
+        fetch = FetchType.EAGER,
     )
-    val schedule: Schedule,
+    @JoinTable(
+        name = "upload_task_to_schedule",
+        joinColumns = [JoinColumn(name = "task_id")],
+        inverseJoinColumns = [JoinColumn(name = "schedule_id")],
+    )
+    var schedules: MutableSet<Schedule>? = null,
 )
 
 enum class TaskStatus {

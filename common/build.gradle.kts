@@ -22,7 +22,13 @@ dependencies {
     implementation("org.springframework.data:spring-data-jpa:3.0.4")
     implementation("javax.persistence:javax.persistence-api:2.2")
 
+    implementation("org.springframework.security:spring-security-core:5.7.3")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
     implementation("org.springframework:spring-web:5.3.25")
+    implementation("javax.servlet:javax.servlet-api:4.0.1")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

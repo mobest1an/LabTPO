@@ -1,4 +1,4 @@
-package com.erik.scheduleservice.dao
+package com.erik.common.market
 
 import com.erik.common.market.Market
 import com.erik.common.market.Schedule
@@ -18,10 +18,4 @@ interface MarketRepository : CrudRepository<Market, Long> {
 interface ScheduleRepository : CrudRepository<Schedule, Long>
 
 @Repository
-interface WeekDayRepository : CrudRepository<WeekDay, Long> {
-    @Query(value = "from WeekDay t where t.startTime BETWEEN :startDate AND :endDate AND t.endTime BETWEEN :startDate AND :endDate")
-    fun getAllBetweenDates(
-        @Param("startDate") startDate: Date,
-        @Param("endDate") endDate: Date
-    ): List<WeekDay>
-}
+interface WeekDayRepository : CrudRepository<WeekDay, Long>

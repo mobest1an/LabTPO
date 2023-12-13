@@ -2,10 +2,10 @@ package com.erik.scheduleservice.service
 
 import com.erik.common.exception.NotFoundException
 import com.erik.common.market.Market
+import com.erik.common.market.MarketRepository
+import com.erik.common.security.getUserFromContext
 import com.erik.common.user.UserService
 import com.erik.scheduleservice.api.v1.http.requests.MarketUploadRequest
-import com.erik.scheduleservice.dao.MarketRepository
-import com.erik.scheduleservice.security.getUserFromContext
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
