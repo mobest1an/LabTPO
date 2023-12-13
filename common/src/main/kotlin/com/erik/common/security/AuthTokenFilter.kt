@@ -23,13 +23,17 @@ class AuthTokenFilter(
         val httpResponse = response!! as HttpServletResponse
         val filterChain = chain!!
 
-        if (httpRequest.getHeader("Authorization") == null) {
+        if (httpRequest.getHeader("Authorization") == null && httpRequest.getHeader("ServiceAuthorization") == null) {
             log.debug("Authorization header is null, therefore request is denied")
             denyRequest(httpRequest, httpResponse, filterChain)
             return
         }
 
-        var token = httpRequest.getHeader("Authorization")
+        var token = if (httpRequest.getHeader("ServiceAuthorization") != null) {
+            httpRequest.getHeader("ServiceAuthorization")
+        } else {
+            httpRequest.getHeader("Authorization")
+        }
         val parts = token.split(" ")
         if (parts[0] != "Bearer") {
             log.debug("Bad JWT token $token was received, the user was rejected")

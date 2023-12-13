@@ -4,6 +4,7 @@ import com.erik.scheduleservice.api.v1.http.requests.ScheduleUploadRequest
 import com.erik.scheduleservice.api.v1.http.views.ScheduleView
 import com.erik.scheduleservice.api.v1.http.views.toView
 import com.erik.scheduleservice.service.ScheduleService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -13,6 +14,7 @@ class ScheduleAdminController(
 ) {
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun createSchedule(@RequestBody request: ScheduleUploadRequest): ScheduleView {
         return scheduleService.createSchedule(request).toView()!!
     }

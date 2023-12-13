@@ -4,6 +4,7 @@ import com.erik.scheduleservice.api.v1.http.requests.MarketUploadRequest
 import com.erik.scheduleservice.api.v1.http.views.MarketView
 import com.erik.scheduleservice.api.v1.http.views.toView
 import com.erik.scheduleservice.service.MarketService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -20,6 +21,7 @@ class MarketAdminController(
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun createMarket(@RequestBody request: MarketUploadRequest): MarketView {
         return marketService.createMarket(request).toView()
     }

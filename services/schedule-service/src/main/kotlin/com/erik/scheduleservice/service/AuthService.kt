@@ -1,5 +1,7 @@
 package com.erik.scheduleservice.service
 
+import com.erik.common.exception.AlreadyExistsException
+import com.erik.common.exception.NotFoundException
 import com.erik.common.user.Role
 import com.erik.scheduleservice.api.v1.http.requests.AuthRequest
 import com.erik.scheduleservice.api.v1.http.views.LoginView
@@ -37,10 +39,20 @@ class AuthService(
     }
 
     fun registerSuperUser(request: AuthRequest) {
-        userDetailsService.save(UserDetails(request.username, encoder.encode(request.password), mutableSetOf(Role.SUPERUSER)), 0)
+        try {
+            userDetailsService.loadUserByUsername(request.username)
+            throw AlreadyExistsException("User already exists")
+        } catch (e: NotFoundException) {
+            userDetailsService.save(UserDetails(request.username, encoder.encode(request.password), mutableSetOf(Role.SUPERUSER)), 0)
+        }
     }
 
     fun registerAdmin(request: AuthRequest) {
-        userDetailsService.save(UserDetails(request.username, encoder.encode(request.password), mutableSetOf(Role.ADMIN)), 0)
+        try {
+            userDetailsService.loadUserByUsername(request.username)
+            throw AlreadyExistsException("User already exists")
+        } catch (e: NotFoundException) {
+            userDetailsService.save(UserDetails(request.username, encoder.encode(request.password), mutableSetOf(Role.ADMIN)), 0)
+        }
     }
 }

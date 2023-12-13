@@ -1,5 +1,6 @@
 package com.erik.scheduleservice.service
 
+import com.erik.common.exception.AlreadyExistsException
 import com.erik.common.exception.NotFoundException
 import com.erik.common.market.MarketRepository
 import com.erik.common.market.Schedule
@@ -25,6 +26,10 @@ class ScheduleService(
 
     fun createSchedule(request: ScheduleUploadRequest): Schedule {
         val market = marketRepository.findById(request.marketId).orElseThrow { NotFoundException() }
+        if (market.schedule != null) {
+            throw AlreadyExistsException("Schedule already exists")
+        }
+
         val schedule = Schedule(
             id = 0L,
             market = market

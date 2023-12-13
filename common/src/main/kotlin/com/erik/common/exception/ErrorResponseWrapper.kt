@@ -4,6 +4,7 @@ enum class HTTPErrorResponseStatus {
     NOT_FOUND,
     BAD_REQUEST,
     INTERNAL_SERVER_ERROR,
+    CONFLICT,
 }
 
 class ErrorResponseWrapper(

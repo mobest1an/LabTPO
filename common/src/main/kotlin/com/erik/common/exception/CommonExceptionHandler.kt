@@ -28,6 +28,17 @@ class CommonExceptionHandler {
             )
 
     @ExceptionHandler
+    fun handleAlreadyExists(e: AlreadyExistsException): ResponseEntity<ErrorResponseWrapper> =
+        ResponseEntity
+            .status(HttpStatus.CONFLICT)
+            .body(
+                ErrorResponseWrapper(
+                    status = HTTPErrorResponseStatus.CONFLICT,
+                    description = e.message ?: "Resource already exists"
+                )
+            )
+
+    @ExceptionHandler
     fun handleMethodArgumentNotValid(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponseWrapper> =
         ResponseEntity
             .status(HttpStatus.BAD_REQUEST)

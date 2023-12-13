@@ -41,6 +41,7 @@ class SecurityConfig(
             cors { disable() }
             csrf { disable() }
             authorizeHttpRequests {
+                authorize("/api/v1/register/**", hasAuthority("MARKET_EDIT"))
                 authorize("/api/v1/market/admin/**", hasAuthority("MARKET_EDIT"))
                 authorize("/api/v1/schedule/admin/**", hasAuthority("SCHEDULE_EDIT"))
                 authorize("/api/v1/**", hasAuthority("DEFAULT"))

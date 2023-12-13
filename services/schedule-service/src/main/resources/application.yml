@@ -2,17 +2,17 @@ spring:
   jpa:
     generate-ddl: true
   datasource:
-    url: jdbc:postgresql://localhost:54320/schedule
+    url: jdbc:postgresql://rc1d-pfsfhzyjbmplu9be.mdb.yandexcloud.net:6432/schedule?targetServerType=master&ssl=true&sslmode=verify-full
     username: schedule
     password: schedule
     driver-class-name: org.postgresql.Driver
 
 private:
   key:
-    filename: "services/schedule-service/private_key.der"
+    filename: "/home/erik/private_key.der"
 public:
   key:
-    filename: "services/schedule-service/public_key.der"
+    filename: "/home/erik/public_key.der"
 
 logging:
   level:
