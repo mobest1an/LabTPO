@@ -7,7 +7,6 @@ import com.erik.common.user.UserService
 import com.erik.scheduleservice.api.v1.http.requests.ScheduleUploadRequest
 import com.erik.scheduleservice.dao.MarketRepository
 import com.erik.scheduleservice.dao.ScheduleRepository
-import com.erik.scheduleservice.dao.WeekDayRepository
 import com.erik.scheduleservice.security.getUserFromContext
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -58,7 +57,7 @@ class ScheduleService(
             val weekDays = request.weekDayUploadRequests.map {
                 WeekDay(
                     id = 0L,
-                    day = it.day,
+                    dayNumber = it.dayNumber,
                     startTime = it.startTime,
                     endTime = it.endTime,
                     schedule = schedule

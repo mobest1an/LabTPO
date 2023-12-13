@@ -32,11 +32,6 @@ class MarketAdminController(
         return marketService.createMarket(request).toView()
     }
 
-    @GetMapping("/{id}")
-    fun getMarketById(@PathVariable id: Long): MarketView {
-        return marketService.getMarketById(id).toView()
-    }
-
     @PutMapping("/{id}")
     fun updateMarket(@PathVariable id: Long, @RequestBody request: MarketUploadRequest): MarketView {
         return marketService.updateMarket(id, request).toView()

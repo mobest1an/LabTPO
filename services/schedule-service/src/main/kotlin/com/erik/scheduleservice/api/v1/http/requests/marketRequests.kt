@@ -25,9 +25,9 @@ data class ScheduleUploadRequest(
 )
 
 data class WeekDayUploadRequest(
-    val day: String,
+    val dayNumber: Int,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
-    val startTime: Date,
+    val startTime: Date? = null,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
-    val endTime: Date,
+    val endTime: Date? = null,
 )

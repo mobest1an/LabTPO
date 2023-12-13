@@ -21,7 +21,7 @@ data class MarketView(
 data class ScheduleView(
     val id: Long,
     val marketId: Long,
-    val weekDays: MutableSet<WeekDayView>,
+    var weekDays: MutableSet<WeekDayView>,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
     val lastChange: Date? = null,
     val lastChangeAuthor: UserView? = null
@@ -29,11 +29,11 @@ data class ScheduleView(
 
 data class WeekDayView(
     val id: Long,
-    val day: String,
+    val dayNumber: Int,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
-    val startTime: Date,
+    val startTime: Date? = null,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
-    val endTime: Date,
+    val endTime: Date? = null,
     val scheduleId: Long,
 )
 
@@ -64,7 +64,7 @@ fun Schedule?.toView(): ScheduleView? {
 
 fun WeekDay.toView(): WeekDayView {
     return WeekDayView(
-        id, day, startTime, endTime, schedule.id
+        id, dayNumber, startTime, endTime, schedule.id
     )
 }
 

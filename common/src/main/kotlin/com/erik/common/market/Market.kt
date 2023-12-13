@@ -64,11 +64,11 @@ class WeekDay(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
-    val day: String,
+    val dayNumber: Int,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
-    val startTime: Date,
+    val startTime: Date? = null,
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ssZ")
-    val endTime: Date,
+    val endTime: Date? = null,
     @ManyToOne
     @JoinColumn(
         name = "schedule_id"
